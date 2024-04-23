@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
 
 const App = () => {
     const navigate = useNavigate();
@@ -26,6 +27,10 @@ const App = () => {
             }).
                 then((res) => {
                     navigate("/login");
+                    toast.success("User Logout Sucessfully!", {
+                        position: "top-right"
+                    });
+
                 }).
                 catch((err) => console.log(err));
 

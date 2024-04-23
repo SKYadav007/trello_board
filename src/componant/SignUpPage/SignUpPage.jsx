@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -11,16 +12,25 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/signup', {
+      const response = await axios.post('http://localhost:10000/api/v1/user/signup', {
         username,
         email,
         password,
       });
       console.log(response);
+      toast.success("User created sucessfully!", {
+        position: "top-right"
+      });
+      navigate("/login")
       // Redirect to login page or show success message
     } catch (error) {
       console.error(error);
-      // Show error message
+      if (error.response.data.massage.includes("duplicate")) {
+        toast.error("User details is exist, please enter the unique details!", {
+          position: "top-right"
+        });
+      }
+
     }
   };
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserAuth } from '../../redux/userSlice';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ const Login = () => {
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+const [error,setError]=useState("");
+
   const navigateToThesignupPage = () => {
     navigate("/signup")
   }
@@ -25,11 +28,21 @@ const Login = () => {
       then((res) => {
         dispatch(setUserAuth(res.data))
         // console.log(res.data);
-  
+      
         localStorage.setItem("currentUserToken",res.data.token);
         navigate("/home");
+        setError("")
+        toast.success("Login Sucessfully!", {
+          position: "top-right"
+      });
       }).
-      catch((err) => console.log(err));
+      catch((err) => {
+        console.log(err.response.data.massage)
+            // setError(err.response.data.massage)
+            toast.error(err.response.data.massage, {
+              position: "top-right"
+          });
+      });
 
   };
 
@@ -71,6 +84,7 @@ const Login = () => {
               className="w-full border border-gray-400 p-2 rounded-md"
             />
           </div>
+          <p className='text-center py-3 text-red-500 font-semibold'>{error}</p>
           <button type="submit" className="w-full bg-blue-400 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-500" onClick={handleSubmit}>
             Log In
           </button>

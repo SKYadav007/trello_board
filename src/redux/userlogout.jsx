@@ -11,7 +11,7 @@ const LogoutReducer = createSlice({
   initialState: initialState,
   reducers: {
     setUserLogout: (state, action) => {
-      console.log(state, action);
+      // console.log(state, action);
       state.isLogout = action.payload;
     }
   }

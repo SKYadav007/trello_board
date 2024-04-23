@@ -9,7 +9,7 @@ const userSlice = createSlice({
     initialState: initialState, // Corrected spelling of initialState
     reducers: {
         setUserAuth: (state, action) => {
-            console.log(state, action);
+            // console.log(state, action);
             state.auth = action.payload;
         }
     }
