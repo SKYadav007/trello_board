@@ -1,0 +1,10 @@
+{
+    "env": [
+        {
+          
+            "SERVER": "Local",
+            "API_BASE_URL": "https://trellobackend-8fcr.onrender.com",
+            "API_BASE_URL_LOCAL": "http://localhost:10000"
+        }
+    ]
+}

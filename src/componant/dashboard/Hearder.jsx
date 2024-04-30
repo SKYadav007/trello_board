@@ -10,7 +10,9 @@ import { setUserLogout } from '../../redux/userlogout';
 import Logout from '../elements/Logout';
 
 
+
 const Hearder = () => {
+    const crtUser=sessionStorage.getItem("crtUser")
     const logout = useSelector(state => state.logout.logoutmodal);
     const dispatch = useDispatch();
     const [isMobileView, setIsMobileView] = useState(false);
@@ -96,10 +98,10 @@ const Hearder = () => {
                         <HiOutlineInformationCircle className='text-white' size={25} />
                     </div>
                 )}
-               
-                    <Logout />
 
-                
+                <Logout />
+
+
             </div>
         </header></div>
     )

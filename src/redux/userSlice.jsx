@@ -6,10 +6,9 @@ const initialState = {
 
 const userSlice = createSlice({
     name: "user",
-    initialState: initialState, // Corrected spelling of initialState
+    initialState, 
     reducers: {
         setUserAuth: (state, action) => {
-            // console.log(state, action);
             state.auth = action.payload;
         }
     }

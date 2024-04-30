@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
-
+import Config from "../../Config.json"
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  let BaseURL = Config.env[0].API_BASE_URL_LOCAL;
+  if (Config.env[0].SERVER == "REMOTE") {
+    BaseURL = Config.env[0].API_BASE_URL;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post('http://localhost:10000/api/v1/user/signup', {
+      const response = await axios.post(BaseURL + '/api/v1/user/signup', {
         username,
         email,
         password,

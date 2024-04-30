@@ -3,24 +3,29 @@ import { Button, Modal } from 'antd';
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
+import Config from "../../Config.json"
 
 const App = () => {
+    const token = sessionStorage.getItem("currentUserToken")
+    const crtUser = sessionStorage.getItem("crtUser")
+    const crtUserEmail = sessionStorage.getItem("crtUserEmail");
     const navigate = useNavigate();
     const currentUserData = {
-        name: "Vire",
-        userEmail: "softech.vire@gmail.com"
+        name: crtUser,
+        userEmail: crtUserEmail
     }
-
+    let BaseURL = Config.env[0].API_BASE_URL_LOCAL;
+    if (Config.env[0].SERVER == "REMOTE") {
+        BaseURL = Config.env[0].API_BASE_URL;
+    }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
     };
     const handleOk = () => {
         setIsModalOpen(false);
-
-        const token = localStorage.getItem("currentUserToken")
         try {
-            axios.get("http://localhost:10000/api/v1/user/logout", {
+            axios.get(BaseURL + "/api/v1/user/logout", {
                 headers: {
                     Authorization: `${token}`
                 }
@@ -38,7 +43,7 @@ const App = () => {
             console.log(error);
 
         }
-        localStorage.removeItem("currentUserToken");
+        sessionStorage.removeItem("currentUserToken");
 
     };
 
@@ -47,7 +52,7 @@ const App = () => {
     };
     return (
         <>
-            <Button type="primary" className='text-xl text-pink-400 font-bold border-none' onClick={showModal}>
+            <Button type="primary" className=' text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={showModal}>
                 {currentUserData?.name.split("")[0]}
             </Button>
             <Modal title="Are you sure want to logout?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

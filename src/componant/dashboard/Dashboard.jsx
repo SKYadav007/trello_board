@@ -1,12 +1,15 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import axios from "axios"
-import { fetchDataFromApi, getJWTWithLogin } from '../../util/api';
-import { setUserAuth } from '../../redux/userSlice';
+import Config from "../../Config.json"
 
 const Dashboard = () => {
+
+  let BaseURL = Config.env[0].API_BASE_URL_LOCAL;
+  if (Config.env[0].SERVER == "REMOTE") {
+    BaseURL = Config.env[0].API_BASE_URL;
+  }
+  console.log(BaseURL);
   const navigate = useNavigate();
   const navigateTotheSignin = () => {
     navigate("/login")
@@ -14,30 +17,7 @@ const Dashboard = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios.post("http://localhost:10000/api/v1/user/login",
-      {
-        "email": "softech.vire@gmail.com",
-        "password": "Trello@123"
-      }
-    ).
-      then((res) =>
-        dispatch(setUserAuth(res.data))
-      ).
-      catch((err) => console.log(err));
-  
-    // getJWTWithLogin("http://localhost:10000/api/v1/user/login",
-    //   {
-    //     "email": "softech.vire@gmail.com",
-    //     "password": "Trello@123"
-    //   }
-    // ).then((res) => (
-    //   dispatch(setUserAuth(res.data))
-    // )).catch((err) => console.log(err));
 
-  }, []);
-
-  console.log(user.auth);
 
   return (
     <div >
@@ -75,7 +55,7 @@ const Dashboard = () => {
         </div>
       </main>
       <div>
-        <p>Name: {}</p>
+        <p>Name: { }</p>
         <button onClick={() => dispatch(auth({ auth: 'John Doe' }))}>Update</button>
 
       </div>

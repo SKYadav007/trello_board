@@ -1,60 +1,82 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState,memo } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserAuth } from '../../redux/userSlice';
 import { toast } from 'react-toastify';
+import Config from "../../Config.json"
 
-const Login = () => {
+const Login = memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-const [error,setError]=useState("");
+  const [error, setError] = useState("");
 
   const navigateToThesignupPage = () => {
     navigate("/signup")
   }
+  let BaseURL = Config.env[0].API_BASE_URL_LOCAL;
+  if (Config.env[0].SERVER == "REMOTE") {
+    BaseURL = Config.env[0].API_BASE_URL;
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post("http://localhost:10000/api/v1/user/login",
+ 
+    await axios.post(BaseURL+"/api/v1/user/login",
       {
         "email": email,
         "password": password
       }
     ).
       then((res) => {
-        dispatch(setUserAuth(res.data))
-        // console.log(res.data);
-      
-        localStorage.setItem("currentUserToken",res.data.token);
+        sessionStorage.setItem("currentUserToken", res.data.token);
+        sessionStorage.setItem("crtUser", res.data.user);
+        sessionStorage.setItem("crtUserID", res.data.id);
+        sessionStorage.setItem("crtUserEmail", res.data.email);
         navigate("/home");
         setError("")
         toast.success("Login Sucessfully!", {
           position: "top-right"
-      });
+        });
       }).
       catch((err) => {
-        console.log(err.response.data.massage)
-            // setError(err.response.data.massage)
-            toast.error(err.response.data.massage, {
-              position: "top-right"
-          });
+        toast.error(err.response.data.massage, {
+          position: "top-right"
+        });
       });
+      
+    try {
+      axios.get(BaseURL + "/api/v1/user/auth")
+        .then((res) => {
+          console.log(res);
+          dispatch(setUserAuth(res))
+          
+        }).
+        catch((err) => {
+        });
 
+    } catch (err) {
+      console.log(err);
+    };
   };
 
 
-  
+
+    
+
+
+
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md">
         <form className="bg-white shadow-md rounded-lg p-8 ">
 
           <div className="mb-6  rounded-lg  flex flex-col items-center">
-            <img className='w-20 h-20 mb-4' src="../src/assets/logo.png" alt="trello" />
+            <img className='w-20 h-20 mb-4' src="../src/logo.png" alt="trello" />
             <h2 className="text-2xl font-bold mb-2 text-center">Login </h2>
           </div>
 
@@ -98,6 +120,6 @@ const [error,setError]=useState("");
       </div>
     </div>
   )
-}
+})
 
 export default Login

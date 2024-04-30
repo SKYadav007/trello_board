@@ -14,7 +14,6 @@ const Home = () => {
         {/* <LeftHeaders /> */}
         {/* <Board /> */}
         <CreateBoard/>
-        
       </div>
 
     </div>

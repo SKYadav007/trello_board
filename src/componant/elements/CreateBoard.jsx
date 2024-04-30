@@ -1,44 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux';
 import axios from "axios"
 import Board from './Board';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Config from "../../Config.json"
+
 const CreateBoard = () => {
     const user = useSelector(state => state.user);
     const [addlist, setAddList] = useState(false);
     const [list, setList] = useState('');
-    const [error, setError] = useState('');
     const [listData, setListData] = useState([]);
+   const token= sessionStorage.getItem("currentUserToken");
+   const crtUserId= sessionStorage.getItem("crtUserID");
 
-
-    const listColor=["#66CCFF", "#FF9999","#6699FF",,"#6666FF","#0099FF","#333366","#003366","#000099","#CC3399","#6600CC"]
+    let BaseURL = Config.env[0].API_BASE_URL_LOCAL;
+    if (Config.env[0].SERVER == "REMOTE") {
+        BaseURL = Config.env[0].API_BASE_URL;
+    }
+    const listColor = ["#66CCFF", "#FF9999", "#6699FF", , "#6666FF", "#0099FF", "#333366", "#003366", "#000099", "#CC3399", "#6600CC"]
     const handleCreateList = () => {
         try {
-            axios.post("http://localhost:10000/api/v1/list/create",
+            axios.post(BaseURL + "/api/v1/list/create",
 
                 {
-                    userID: user.auth.id,
+                    userID: crtUserId,
                     "listname": list,
-                    "card": [],
                 },
                 {
                     headers: {
-                        Authorization: user.auth.token
+                        Authorization:token
                     }
 
                 }
             ).
                 then((res) => {
                     console.log(res.data);
-                    setError()
+                    
                     toast.success("List created Sucessfully!", {
                         position: "top-right"
                     });
                 }).
-                catch((err) => {
-                    setError(err.response.data.massage)
-                    console.log(err);
+                catch(() => {
                     toast.error("unable to create the list!", {
                         position: "top-right"
                     });
@@ -46,40 +49,38 @@ const CreateBoard = () => {
         } catch (error) {
             console.log(error);
         }
-        addlist ? setAddList(false) : ""
-
+        addlist ? setAddList(false) : "";
+       
     }
-
-    useEffect(() => {
-        try {
-            axios.get("http://localhost:10000/api/v1/list",
-                {
-                    headers: {
-                        Authorization: user.auth.token
-                    }
+useEffect(()=>{
+   const fetchList=async()=>{
+    await loadList();
+   }
+   fetchList();
+},[])
+ 
+ 
+const loadList = async () => {
+    try {
+        const fetchedList =  await  axios.get(BaseURL + "/api/v1/list",
+            {
+                headers: {
+                    Authorization: token
                 }
-            ).
-                then((res) => {
-                    setListData(res.data.list)
-                    setError("")
-                }).
-                catch((err) => {
-                    setError(err.response.data.massage)
-                });
-        } catch (err) {
-            console.log(err);
-        }
-        // console.log(listData, user.auth);
-    }, [])
-
-
+            })                              
+       
+        setListData(fetchedList.data.list);
+    } catch (error) {
+        console.log(error);
+    }
+};
     return (
         <div className='flex flex-row justify-start items-center gap-5 overflow-x-scroll max-lg:flex-col'>
             <>
                 {
-                    listData?.map((list, idx) => {
-                        //  console.log(list);
-                        return (<div className='w-full flex justify-center items-center text-center font-bold py-2 px-4 bg-red-300 rounded' style={{backgroundColor:listColor[idx]}}><Board index={idx} listname={list.listname} id={list._id} cards={list.cards}/></div>)
+                   listData?.map((list, idx) => {
+                      
+                        return (<div key={list._id} className='w-full flex justify-center items-center text-center font-bold py-2 px-4 bg-red-300 rounded' style={{ backgroundColor: listColor[idx] }}><Board index={idx} listname={list.listname} id={list._id} cards={list.cards} /></div>)
 
                     })
                 }

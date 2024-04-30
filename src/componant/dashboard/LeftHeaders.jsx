@@ -14,7 +14,7 @@ const LeftHeaders = () => {
             </div>
             <div className='flex justify-center'>
                 <button className="w-70 max-lg:w-70 md:w-60 shadow-md hover:bg-red-400 text-black font-semibold py-2 px-4 md:px-8 lg:px-10 rounded text-center">
-                    Sign out    
+                    Sign out
                 </button>
             </div>
         </div>

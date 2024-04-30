@@ -8,8 +8,7 @@ export default function HomeNav() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const user = useSelector(state => state.user.auth);
-  const token = localStorage.getItem("currentUserToken")
-  
+  const token = sessionStorage.getItem("currentUserToken") 
 
 
   useEffect(() => {

@@ -12,8 +12,6 @@ export default function Signup() {
       setLoading(false);
     }, 1000)
 
-    
-
   }, []);
   return loading ? <TopProgressBar /> : <SignUpPage />;
 }
