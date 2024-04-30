@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
 import Config from "../../Config.json"
+import logo from "../../assets/logo.png"
+
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -47,7 +49,7 @@ const SignUpPage = () => {
       <div className="w-full max-w-md">
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-8">
           <div className="mb-6  rounded-lg  flex flex-col items-center">
-            <img className='w-20 h-20 mb-4' src="../src/assets/logo.png" alt="trello" />
+            <img className='w-20 h-20 mb-4' src={logo} alt="trello" />
             <h2 className="text-2xl font-bold mb-2 text-center">Sign Up </h2>
           </div>
           <div className="mb-4">
