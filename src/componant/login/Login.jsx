@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Config from "../../Config.json"
 import logo from "../../assets/logo.png"
 
+
 const Login = memo(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +26,7 @@ const Login = memo(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
- 
+
     await axios.post(BaseURL+"/api/v1/user/login",
       {
         "email": email,
@@ -72,10 +73,11 @@ const Login = memo(() => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md">
-        <form className="bg-white shadow-md rounded-lg p-8 ">
+        <form className="bg-pink-200 shadow-md rounded-lg p-8 ">
 
           <div className="mb-6  rounded-lg  flex flex-col items-center">
-            <img className='w-20 h-20 mb-4' src={logo} alt="trello" />
+            <h1><span className='text-pink-400'>Trello.com</span></h1>
+            {/* <img className='w-20 h-20 mb-4' src={logo} alt="trello" /> */}
             <h2 className="text-2xl font-bold mb-2 text-center">Login </h2>
           </div>
 
@@ -106,13 +108,13 @@ const Login = memo(() => {
             />
           </div>
           <p className='text-center py-3 text-red-500 font-semibold'>{error}</p>
-          <button type="submit" className="w-full bg-blue-400 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-500" onClick={handleSubmit}>
+          <button type="submit" className="w-full bg-pink-500 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-600" onClick={handleSubmit}>
             Log In
           </button>
         </form>
         <div className="mt-4 text-center">
           <p className="text-gray-700">Don't have an account?</p>
-          <button className="text-blue-500 hover:underline" onClick={navigateToThesignupPage}>
+          <button className="text-pink-500 hover:underline" onClick={navigateToThesignupPage}>
             Sign Up
           </button>
         </div>

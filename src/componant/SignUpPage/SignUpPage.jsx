@@ -47,9 +47,11 @@ const SignUpPage = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md">
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-8">
+        <form onSubmit={handleSubmit} className="bg-pink-200 shadow-md rounded-lg p-8">
           <div className="mb-6  rounded-lg  flex flex-col items-center">
-            <img className='w-20 h-20 mb-4' src={logo} alt="trello" />
+          <h1><span className='text-pink-400'>Trello.com</span></h1>
+           
+            {/* <img className='w-20 h-20 mb-4' src={logo} alt="trello" /> */}
             <h2 className="text-2xl font-bold mb-2 text-center">Sign Up </h2>
           </div>
           <div className="mb-4">
@@ -88,14 +90,14 @@ const SignUpPage = () => {
               className="w-full border border-gray-400 p-2 rounded-md"
             />
           </div>
-          <button type="submit" className="w-full bg-blue-400 text-white font-bold  py-2 px-4 rounded-md hover:bg-blue-500">
+          <button type="submit" className="w-full bg-pink-500 text-white font-bold  py-2 px-4 rounded-md hover:bg-blue-600">
             Sign Up
           </button>
 
         </form>
         <div className="mt-4 text-center">
           <p className="text-gray-700">Already have an account?</p>
-          <button className="text-blue-500 hover:underline" onClick={navigateToTheLoginPage}>
+          <button className="text-pink-500 hover:underline" onClick={navigateToTheLoginPage}>
             Sign In
           </button>
         </div>

@@ -8,8 +8,7 @@ export default function LoginPage() {
   let navigate = useNavigate();
   useEffect(() => {
     const intervel = setInterval(() => {
-    
-      clearTimeout(intervel);
+          clearTimeout(intervel);
       setLoading(false);
     }, 1000)
 

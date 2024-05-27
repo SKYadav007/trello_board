@@ -19,7 +19,8 @@ export default function LoginPage() {
         clearTimeout(intervel);
         setLoading(false);
       }, 1000)
-
+     
+      
     }
   }, [token]);
 

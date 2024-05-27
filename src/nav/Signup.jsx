@@ -11,7 +11,7 @@ export default function Signup() {
       clearTimeout(intervel);
       setLoading(false);
     }, 1000)
-
+    navigate("/signup");
   }, []);
   return loading ? <TopProgressBar /> : <SignUpPage />;
 }
