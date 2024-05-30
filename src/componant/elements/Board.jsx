@@ -12,6 +12,7 @@ const Board = (prop) => {
     const contentEditableRef = useRef(null);
     const [cards, setCards] = useState([]);
     const token = sessionStorage.getItem("currentUserToken");
+    const crtUserId= sessionStorage.getItem("crtUserID");
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -27,7 +28,7 @@ const Board = (prop) => {
 
     const updateListName = (req, res) => {
         try {
-            axios.patch(`http://localhost:10000/api/v1/list/${prop.id}`,
+            axios.patch(BaseURL + `/api/v1/list//${prop.id}`,
 
                 {
                     headers: {
@@ -93,10 +94,7 @@ const Board = (prop) => {
 
     };
 
-    const addCardToTheList = async () => {
-
-
-    }
+   
     useEffect(() => {
         const fetchCards = async () => {
             await loadCards();
@@ -125,6 +123,7 @@ const Board = (prop) => {
                     <>
                         {
                             cards?.map((card, idx) => {
+                           
                                 return <Card key={idx} title={card?.title} status={card?.status} description={card?.description} createdDate={card?.createdDate} />
                             })
 
@@ -136,7 +135,7 @@ const Board = (prop) => {
 
                     <div className="w-full flex justify-center items-center cursor-pointer mt-3">
                         {/* <div className=" w-full text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={addCardToTheList}>+ Add Card</div> */}
-                        <AddNewCard />
+                        <AddNewCard listid={prop.id}/>
                     </div>
 
                     

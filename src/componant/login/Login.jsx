@@ -73,10 +73,10 @@ const Login = memo(() => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md">
-        <form className="bg-pink-200 shadow-md rounded-lg p-8 ">
+        <form className="bg-slate-300 shadow-md rounded-lg p-8 ">
 
           <div className="mb-6  rounded-lg  flex flex-col items-center">
-            <h1><span className='text-pink-400'>Trello.com</span></h1>
+            <h1><span className='text-blue-500'>Trello.com</span></h1>
             {/* <img className='w-20 h-20 mb-4' src={logo} alt="trello" /> */}
             <h2 className="text-2xl font-bold mb-2 text-center">Login </h2>
           </div>
@@ -91,7 +91,7 @@ const Login = memo(() => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Username or Email'
-              className="w-full border border-gray-400 p-2 rounded-md"
+              className="w-full border border-gray-400 p-2 pl-5 rounded-md"
             />
           </div>
           <div className="mb-4">
@@ -104,17 +104,17 @@ const Login = memo(() => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
-              className="w-full border border-gray-400 p-2 rounded-md"
+              className="w-full border border-gray-400 p-2 pl-5 rounded-md"
             />
           </div>
           <p className='text-center py-3 text-red-500 font-semibold'>{error}</p>
-          <button type="submit" className="w-full bg-pink-500 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-600" onClick={handleSubmit}>
+          <button type="submit" className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600" onClick={handleSubmit}>
             Log In
           </button>
         </form>
         <div className="mt-4 text-center">
           <p className="text-gray-700">Don't have an account?</p>
-          <button className="text-pink-500 hover:underline" onClick={navigateToThesignupPage}>
+          <button className="text-blue-500 hover:underline" onClick={navigateToThesignupPage}>
             Sign Up
           </button>
         </div>

@@ -55,8 +55,8 @@ const Dashboard = () => {
         </div>
       </main>
       <div>
-        <p>Name: { }</p>
-        <button onClick={() => dispatch(auth({ auth: 'John Doe' }))}>Update</button>
+        {/* <p>Name: { }</p>
+        <button onClick={() => dispatch(auth({ auth: 'John Doe' }))}>Update</button> */}
 
       </div>
     </div>

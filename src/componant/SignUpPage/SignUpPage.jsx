@@ -23,11 +23,13 @@ const SignUpPage = () => {
         email,
         password,
       });
-      console.log(response);
-      toast.success("User created sucessfully!", {
-        position: "top-right"
-      });
-      navigate("/login")
+    
+        toast.success("User created sucessfully!", {
+          position: "top-right"
+        });
+        navigate("/login")
+   
+     
       // Redirect to login page or show success message
     } catch (error) {
       console.error(error);
@@ -35,8 +37,12 @@ const SignUpPage = () => {
         toast.error("User details is exist, please enter the unique details!", {
           position: "top-right"
         });
+      }else
+      if (error.response.data.massage) {
+        toast.error("User details doesn't exist, please enter the unique details!", {
+          position: "top-right"
+        });
       }
-
     }
   };
 
@@ -47,9 +53,9 @@ const SignUpPage = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md">
-        <form onSubmit={handleSubmit} className="bg-pink-200 shadow-md rounded-lg p-8">
+        <form onSubmit={handleSubmit} className="bg-slate-300 shadow-md rounded-lg p-8">
           <div className="mb-6  rounded-lg  flex flex-col items-center">
-          <h1><span className='text-pink-400'>Trello.com</span></h1>
+          <h1><span className='text-blue-400'>Trello.com</span></h1>
            
             {/* <img className='w-20 h-20 mb-4' src={logo} alt="trello" /> */}
             <h2 className="text-2xl font-bold mb-2 text-center">Sign Up </h2>
@@ -62,8 +68,9 @@ const SignUpPage = () => {
               type="text"
               id="username"
               value={username}
+              placeholder='Username'
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full border border-gray-400 p-2 rounded-md"
+              className="w-full border border-gray-400 p-2  pl-5 rounded-md"
             />
           </div>
           <div className="mb-4">
@@ -74,8 +81,9 @@ const SignUpPage = () => {
               type="email"
               id="email"
               value={email}
+              placeholder='Email'
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-400 p-2 rounded-md"
+              className="w-full border border-gray-400 p-2 pl-5 rounded-md"
             />
           </div>
           <div className="mb-4">
@@ -86,18 +94,19 @@ const SignUpPage = () => {
               type="password"
               id="password"
               value={password}
+              placeholder='Password'
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-400 p-2 rounded-md"
+              className="w-full border border-gray-400 p-2 pl-5 rounded-md"
             />
           </div>
-          <button type="submit" className="w-full bg-pink-500 text-white font-bold  py-2 px-4 rounded-md hover:bg-blue-600">
+          <button type="submit" className="w-full bg-blue-500 text-white font-bold  py-2 px-4 rounded-md hover:bg-blue-600">
             Sign Up
           </button>
 
         </form>
         <div className="mt-4 text-center">
           <p className="text-gray-700">Already have an account?</p>
-          <button className="text-pink-500 hover:underline" onClick={navigateToTheLoginPage}>
+          <button className="text-blue-500 hover:underline" onClick={navigateToTheLoginPage}>
             Sign In
           </button>
         </div>

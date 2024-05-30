@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className='flex max-md:flex-col mt-2 ml-2 max-lg:justify-center max-md:items-center'>
+      <div className='flex max-md:flex-col mt-10 ml-2 max-lg:justify-center max-md:items-center'>
         {/* <LeftHeaders /> */}
         {/* <Board /> */}
         <CreateBoard/>

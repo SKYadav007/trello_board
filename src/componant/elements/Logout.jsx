@@ -52,9 +52,12 @@ const App = () => {
     };
     return (
         <>
-            <Button type="primary" className=' text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={showModal}>
+        <div className='p-2 pt-0 rounded bg-white'>
+        <Button  className='text-4xl text-center text-pink-600 font-bold py-2 px-4 rounded border-none' onClick={showModal}>
                 {currentUserData?.name.split("")[0]}
             </Button>
+        </div>
+       
             <Modal title="Are you sure want to logout?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <div className="bg-white p-6 rounded-lg shadow-lg z-50">
                     <h2 className="text-lg font-semibold mb-4">Logout Confirmation</h2>
