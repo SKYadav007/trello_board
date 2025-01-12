@@ -5,6 +5,8 @@ import Config from "../../Config.json"
 import { toast } from "react-toastify"
 
 const AddNewCard = (prop) => {
+
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const crtUser = sessionStorage.getItem("crtUser")
     const [title, setTitle] = useState("");
